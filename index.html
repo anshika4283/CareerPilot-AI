@@ -2,13 +2,12 @@
 <html>
 <head>
 <title>CareerPilot AI</title>
-
 <style>
-
 body{
-font-family: Arial;
-background:#f2f2f2;
+font-family:Arial;
+background:#f4f6f9;
 text-align:center;
+margin-top:40px;
 }
 
 #chatbox{
@@ -17,12 +16,7 @@ margin:auto;
 background:white;
 padding:20px;
 border-radius:10px;
-box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-}
-
-#messages{
-text-align:left;
-margin-bottom:20px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 input{
@@ -32,28 +26,30 @@ padding:10px;
 
 button{
 padding:10px 20px;
-background:#007bff;
+background:#0070f3;
 color:white;
 border:none;
 border-radius:5px;
 cursor:pointer;
 }
 
+.message{
+margin-top:10px;
+text-align:left;
+}
 </style>
-
 </head>
 
 <body>
 
 <h1>CareerPilot AI</h1>
-<p>Free AI for Resume Building & Interview Preparation</p>
+<p>Resume & Interview Preparation Assistant</p>
 
 <div id="chatbox">
 
 <div id="messages"></div>
 
-<input id="userInput" placeholder="Ask your career question here..."/>
-
+<input id="userInput" placeholder="Ask about resume or interview..." />
 <button onclick="sendMessage()">Send</button>
 
 </div>
@@ -62,49 +58,41 @@ cursor:pointer;
 
 async function sendMessage(){
 
-let input=document.getElementById("userInput").value;
+const input = document.getElementById("userInput");
+const messages = document.getElementById("messages");
 
-document.getElementById("messages").innerHTML +=
-"<p><b>You:</b> "+input+"</p>";
+const userText = input.value;
+
+messages.innerHTML += "<div class='message'><b>You:</b> "+userText+"</div>";
+
+input.value="";
 
 const response = await fetch("https://openrouter.ai/api/v1/chat/completions",{
-
 method:"POST",
-
 headers:{
-"Authorization":"Bearer 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",
-"Content-Type":"application/json"
+"Content-Type":"application/json",
+"Authorization":"Bearer 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"
 },
-
 body:JSON.stringify({
-
 model:"openai/gpt-4o-mini",
-
 messages:[
 {
 role:"system",
-content:"You are an expert HR recruiter and MBA admissions coach. 
-Help users create ATS-optimized resumes, improve bullet points with measurable achievements, 
-prepare for job interviews, and practice MBA interview questions. 
-Ask mock interview questions one at a time and give detailed feedback."
+content:"You are an expert HR recruiter and MBA admissions coach helping with resumes and interview preparation."
 },
 {
 role:"user",
-content:input
+content:userText
 }
-
 ]
-
 })
-
 });
 
 const data = await response.json();
 
-let reply = data.choices[0].message.content;
+const aiReply = data.choices[0].message.content;
 
-document.getElementById("messages").innerHTML +=
-"<p><b>AI:</b> "+reply+"</p>";
+messages.innerHTML += "<div class='message'><b>AI:</b> "+aiReply+"</div>";
 
 }
 
