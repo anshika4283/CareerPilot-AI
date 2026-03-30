@@ -1,2 +1,2 @@
-# CareerPilot-AI
-Free AI for resume building and interview preparation
+<h1>Nova AI</h1>
+<p>Your Smart AI Assistant for Everything</p>
