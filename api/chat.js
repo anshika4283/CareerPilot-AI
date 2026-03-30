@@ -15,7 +15,7 @@ headers: {
 "Content-Type": "application/json"
 },
 body: JSON.stringify({
-inputs: "Answer clearly: " + userMessage
+inputs: `<s>[INST] ${userMessage} [/INST]`
 })
 });
 
