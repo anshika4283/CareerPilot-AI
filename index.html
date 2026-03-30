@@ -60,31 +60,53 @@ function generateReply(input){
 
 input = input.toLowerCase();
 
+// greetings
 if(input.includes("hello") || input.includes("hi")){
 return "Hello! How can I help you today?";
 }
 
-if(input.includes("name")){
-return "I am Nova AI, your assistant.";
+// how are you
+if(input.includes("how are you")){
+return "I'm doing great! Ready to help you 🚀";
 }
 
+// name
+if(input.includes("your name")){
+return "I am Nova AI, your smart assistant.";
+}
+
+// instagram founder
+if(input.includes("instagram founder")){
+return "Instagram was founded by Kevin Systrom and Mike Krieger.";
+}
+
+// war / news
+if(input.includes("war") || input.includes("conflict")){
+return "Global conflicts depend on geopolitical factors. It's best to check reliable news sources for the latest updates.";
+}
+
+// career
 if(input.includes("career")){
-return "For a strong career, focus on skills, networking, and consistent learning.";
+return "Focus on skills, internships, networking, and continuous learning to build a strong career.";
 }
 
+// mba
 if(input.includes("mba")){
-return "For MBA, focus on CAT/GRE, strong profile, and good communication skills.";
+return "For MBA, prepare for exams like CAT/GRE, build a strong profile, and improve communication skills.";
 }
 
+// interview
 if(input.includes("interview")){
-return "For interviews, prepare your introduction, practice common questions, and stay confident.";
+return "Prepare your introduction, research the company, and practice common questions.";
 }
 
+// study
 if(input.includes("study")){
-return "Create a study schedule, avoid distractions, and revise regularly.";
+return "Make a study plan, stay consistent, and revise regularly.";
 }
 
-return "That's interesting! Tell me more or ask something specific.";
+// fallback (smarter)
+return "I'm still learning! Try asking about career, MBA, interviews, or general knowledge 😊";
 }
 
 function sendMessage(){
