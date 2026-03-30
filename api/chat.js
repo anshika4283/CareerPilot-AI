@@ -8,7 +8,7 @@ try {
 
 const userMessage = req.body.message;
 
-const response = await fetch("https://api-inference.huggingface.co/models/google/flan-t5-large", {
+const response = await fetch("https://router.huggingface.co/hf-inference/models/google/flan-t5-large", {
 method: "POST",
 headers: {
 "Authorization": "Bearer " + process.env.HF_TOKEN,
