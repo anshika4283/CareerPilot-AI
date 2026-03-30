@@ -6,38 +6,37 @@
 <style>
 body{
 font-family: Arial;
-background: #f4f6f9;
-text-align: center;
-margin-top: 40px;
+background:#f4f6f9;
+text-align:center;
+margin-top:40px;
 }
 
 #chatbox{
-width: 60%;
-margin: auto;
-background: white;
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0,0,0,0.1);
+width:60%;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 input{
-width: 70%;
-padding: 10px;
-margin-top: 10px;
+width:70%;
+padding:10px;
 }
 
 button{
-padding: 10px 20px;
-background: #0070f3;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+padding:10px 20px;
+background:#0070f3;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
 }
 
 .message{
-margin-top: 10px;
-text-align: left;
+margin-top:10px;
+text-align:left;
 }
 </style>
 
@@ -46,7 +45,7 @@ text-align: left;
 <body>
 
 <h1>Nova AI</h1>
-<p>Your Smart AI Assistant for Everything</p>
+<p>Your Smart AI Assistant</p>
 
 <div id="chatbox">
 <div id="messages"></div>
@@ -57,7 +56,38 @@ text-align: left;
 
 <script>
 
-async function sendMessage(){
+function generateReply(input){
+
+input = input.toLowerCase();
+
+if(input.includes("hello") || input.includes("hi")){
+return "Hello! How can I help you today?";
+}
+
+if(input.includes("name")){
+return "I am Nova AI, your assistant.";
+}
+
+if(input.includes("career")){
+return "For a strong career, focus on skills, networking, and consistent learning.";
+}
+
+if(input.includes("mba")){
+return "For MBA, focus on CAT/GRE, strong profile, and good communication skills.";
+}
+
+if(input.includes("interview")){
+return "For interviews, prepare your introduction, practice common questions, and stay confident.";
+}
+
+if(input.includes("study")){
+return "Create a study schedule, avoid distractions, and revise regularly.";
+}
+
+return "That's interesting! Tell me more or ask something specific.";
+}
+
+function sendMessage(){
 
 const input = document.getElementById("userInput");
 const messages = document.getElementById("messages");
@@ -67,29 +97,12 @@ const userText = input.value;
 if(userText.trim() === "") return;
 
 messages.innerHTML += "<div class='message'><b>You:</b> " + userText + "</div>";
+
+const reply = generateReply(userText);
+
+messages.innerHTML += "<div class='message'><b>AI:</b> " + reply + "</div>";
+
 input.value = "";
-
-messages.innerHTML += "<div class='message'><b>AI:</b> Thinking...</div>";
-
-try {
-
-const response = await fetch("/api/chat", {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
-},
-body: JSON.stringify({
-message: userText
-})
-});
-
-const data = await response.json();
-
-messages.innerHTML = messages.innerHTML.replace("Thinking...", data.reply);
-
-} catch (error) {
-messages.innerHTML = messages.innerHTML.replace("Thinking...", "Error: " + error.message);
-}
 
 }
 
